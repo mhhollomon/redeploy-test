@@ -1,0 +1,27 @@
+name: build with grunt
+
+on:
+    push:
+        branches: 
+            - grunt
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+        
+      - name: setup hugo
+        uses: peaceiris/actions-hugo@master
+        with:
+          hugo-version: '0.61.0'
+          extended: true
+
+      - name: build
+        run : |
+            env
+            npm install grunt-cli && \
+                npm install && node_modules/grunt-cli/bin/grunt

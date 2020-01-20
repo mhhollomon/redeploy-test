@@ -1,0 +1,10 @@
+<footer class="main-footer">
+  <div class="container">
+        <p>&copy; 2018-{{ now.Format "2006" }} &middot; {{ .Site.Params.copyright | markdownify }}</p>
+  </div>
+</footer>
+
+{{ range .Site.Params.custom_js }}
+<link rel="stylesheet" href="{{ . | relURL }}">
+{{ end }}
+

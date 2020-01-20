@@ -1,0 +1,7 @@
+.spare_table tr {
+    border-bottom : 1px solid black;
+}
+.spare_table td {
+    padding: 6px;
+}
+

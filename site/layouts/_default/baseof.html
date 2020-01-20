@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "en" }}" 
+      prefix="og: http://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ hugo.Generator }}
+{{- block "head-title" . }}
+    <meta name="description" content="{{ .Site.Params.site_description }}">
+    {{ if .IsNode }}
+    <title>{{ .Site.Title }}</title>
+    {{ else }}
+    <title>{{ .Site.Title }} {{ with .Title }} | {{ . }}{{ end }}</title>
+    {{end}}
+{{end -}}
+{{ with .OutputFormats.Get "RSS" }}
+    <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
+{{ end }}
+{{- block "head-fonts" . }}
+    {{partial "html-header/fonts.html" . }}
+{{end}}
+{{- block "head-styles" . }}
+    <link rel="stylesheet" href="{{ "css/styles.css" | relURL }}">
+{{end}}
+
+{{/* only make this a partial. I don't really see a need to
+     be able to override it in the individual templates */}}
+{{ partial "html-header/favicon.html" . }}
+
+    <!-- Site Verification -->
+    {{ with $.Site.Param "siteVerification" -}}
+    <meta name="google-site-verification" content="{{.}}" />
+    {{- end}}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{.Title}}" />
+    {{ if .IsHome}}
+    <meta property="og:type"  content="website" />
+    {{- else -}}
+    <meta property="og:type"  content="article" />
+    {{end}}
+    {{if .IsPage}}
+    <meta property="og:description" content="{{ .Description | default .Summary }}" />
+    {{with .Keywords -}}
+    {{- $kw := delimit . "," -}}
+    <meta propery="keywords" content="{{$kw}}">
+    {{- end}}
+    {{else}}
+    <meta property="og:description" content="{{.Site.Params.site_description}}" />
+    {{end}}
+    <meta property="og:url"   content="{{.Permalink}}" />
+{{ with .Resources.GetMatch "hero" }}
+    {{- $image := .Fill "800x300" -}}
+    <meta property="og:image" content="{{$image.Permalink }}" />
+    <meta property="og:image:width" content="{{$image.Width }}" />
+    <meta property="og:image:height" content="{{$image.Height }}" />
+{{end}}
+
+    <!-- Facebook -->
+    {{/*
+    {{ with getenv "FACEBOOK_APP_ID" }}
+    <meta property="fb:app_id" content="{{.}}" />
+    {{end -}}
+    */}}
+
+{{ if hasPrefix .Site.GoogleAnalytics "UA-" -}}
+    {{ template "_internal/google_analytics.html" . }}
+{{- end}}
+
+    <!-- comments -->
+{{- if .IsPage }}
+    {{- with .Site.Params.commentbox_project -}}
+        <script deferred src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
+    {{- end}}
+{{- end}}
+{{- if .IsPage }}
+    {{ range .Resources.ByType "css" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ end }}
+{{ end }}
+
+</head>
+
+<!--             -->
+
+<!--
+    The body is made up of threee blocks.
+    The header that contains the site banner and name
+    A "main" block that contians the side-bar and the main content
+    A footer tha contains copy-right etc.
+-->
+
+<body class="color-2gray font-serif leading-relaxed">
+    <header class="w-full bg-cover bg-no-repeat bg-white bg-center flex items-center content-center" 
+        style="background-image: url({{ .Site.Params.header_background | relURL }});" >
+        <div class="m-auto text-center bg-gray" >
+            <span class="text-white font-medium md:text-7xl text-4xl align-middle">{{ .Site.Params.header_title }}</span>
+        </div>
+    </header>
+    <div class="container lg:container mx-auto flex flex-col md:flex-row-reverse justify-center pt-16">
+    {{block "main" .}}
+    {{end}}
+    {{ partial "sidebar" . }}
+    </div>
+
+{{- partial "footer" . }}
+</body>
+
+</html>

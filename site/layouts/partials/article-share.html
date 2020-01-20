@@ -1,0 +1,24 @@
+<hr>
+<ul class="share-buttons">
+    <li>{{ .Site.Data.l10n.share.title }}</li>
+    <li>
+        <a  href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="{{ .Site.Data.l10n.share.facebook }}">
+            <i class="fa-2x fab fa-facebook"></i>
+        </a>
+    </li>
+    <li>
+        <a  href="https://twitter.com/share?text={{ .Title }}&amp;url={{ .Permalink }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="{{ .Site.Data.l10n.share.twitter }}">
+            <i class="fa-2x fab fa-twitter"></i>
+        </a>
+    </li>
+    <li>
+        <a  href="https://www.reddit.com/submit?url={{ .Permalink }}&amp;title={{.Title}}" onclick="window.open(this.href, 'reddit-share', 'width=490,height=530');return false;" title="Share on Reddit">
+            <i class="fa-2x fab fa-reddit"></i>
+        </a>
+    </li>
+    <li>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ .Permalink }}&title={{ .Title }}" onclick="window.open(this.href, 'linkedin-share', 'width=600,height=494');return false;" title="{{ .Site.Data.l10n.share.linkedin }}">
+            <i class="fa-2x fab fa-linkedin"></i>
+        </a>
+    </li>
+</ul>

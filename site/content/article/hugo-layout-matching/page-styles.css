@@ -1,0 +1,38 @@
+.dir-list,
+.dir-list__entry,
+.dir-list__dir-cnt {
+	position: relative;
+	line-height: normal;
+    list-style: none;
+}
+
+.dir-list__dir-cnt {
+    padding-left: 1.5em;
+}
+
+.dir-list__entry::before, 
+.dir-list__entry::after {
+
+    content: "";
+    position: absolute;
+    left: -0.7em;
+}
+
+.dir-list__entry::before {
+    border-top: 1px solid #000;
+    top: 0.8em;
+    width: .48em;
+    height: 0;
+}
+
+.dir-list__entry::after {
+    border-left: 1px solid #000;
+    height: 100%;
+    width: 0px;
+    top: 0px;
+}
+
+.dir-list__entry:last-child::after {
+    height: 0.8em;
+}
+

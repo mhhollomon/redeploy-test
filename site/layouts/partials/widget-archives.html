@@ -1,0 +1,6 @@
+<div class="archive">
+    <h3 class="archive__title">Archives</h3>
+    {{ range sort .Site.Taxonomies.archives "Page.Title" "desc" }}
+    <a href="{{.Page.RelPermalink}}">{{ .Page.Title }}</a> ({{ .Count }})<br>
+    {{ end }}
+</div>

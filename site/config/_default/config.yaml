@@ -1,0 +1,70 @@
+baseurl : "https://www.codevamping.com/"
+languageCode : "en-us"
+title : "Code Vamping"
+
+# Define how many pages appear per site
+paginate : 10
+
+# Enable comments powered by Disqus by entering your disqus shortname
+#disqusShortname : "spf13"
+
+taxonomies:
+    tag : tags
+    archive : archives
+
+permalinks:
+    article : "/:year/:month/:filename"
+
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
+    highlight:
+        style: autumn
+
+params:
+    site_author : "Mark Hollomon"
+    site_description : "Code Vamping - A (mostly) software development blog with music thrown in for spice"
+    # Link custom assets relative to /static
+    header_background : "img/bass_header_narrow2.jpg"
+    header_title : "Code Vamping"
+    copyright : 
+        Mark Hollomon 
+        &middot; Powered by [Hugo](https://www.gohugo.io) 
+        &middot; Hosted by [Firebase](https://firebase.google.com/)
+        &middot; Icons by [FontAwesome](https://www.fontawesome.com/)
+
+    # Define which content types are shown on the homepage
+    mainSections : ["article", "page"]
+
+
+social :
+    # Add your social network accounts to the profile section on the left
+    # by entering your username. The links to your account will be
+    # create automatically.
+    linkedin  : "markhollomon"
+    stackoverflow : "10741691/mhhollomon"
+    github    : "mhhollomon"
+    reddit    : "mhhollomon"
+
+menu:
+    brand:
+        - identifier : "home"
+          name : "Home<fas fa-home>"
+          url : "/"
+          weight : -110
+
+        - identifier : "topics"
+          name : "TopicPages<fas fa-scroll>"
+          url  : "/page/"
+          weight : -100
+
+        - identifier : "tags"
+          name : "Tags<fas fa-tags>"
+          url  : "/tags/"
+          weight : -100
+
+        - identifier : "about"
+          name : "About<fas fa-address-card>"
+          url : "/about/"
+          weight : -90

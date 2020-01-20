@@ -1,0 +1,29 @@
+<aside class="side-bar">
+  <p class="name">
+  <strong>{{ .Site.Params.site_author }}</strong></p>
+  <p class="address">{{ .Site.Params.location }}</p>
+  <p class="link"></p>
+  <ul class="social">
+    {{ partial "social" . }}
+  </ul>
+  <br>
+  {{ with .Site.Menus.brand }}
+  <hr>
+  <div class="navbar-brand">
+    {{ range . }}
+    <a class="navbar-item" href="{{.URL}}">
+
+    {{ $class := findRE "<([^>]+)>" .Name 1 }}
+    {{ $name := replaceRE "<([^>]+)>" "" .Name }}
+    {{range $class}}
+      <i class="{{substr . 1 -1}}"></i>
+    {{end}}
+      {{$name}}
+    </a>
+    {{end}}
+  </div>
+  {{end}}
+  <hr>
+  {{ partial "widget-archives" . }}
+  <hr>
+</aside>

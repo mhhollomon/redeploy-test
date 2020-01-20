@@ -1,0 +1,16 @@
+{{define "main"}}
+    <main class="main-content flex post">
+    <div class="main-content__column">
+    <h2>{{ .Title }} (By Count)</h2>
+    {{ range $key, $value := .Data.Terms.ByCount }}
+            <a class="block my-2 text-xl leading-loose" href="{{ $value.Name | urlize }}">{{ $value.Name }} ({{ $value.Count }})</a>
+    {{ end }}
+    </div>
+    <div class="main-content__column">
+    <h2>{{ .Title }} (By Name)</h2>
+    {{ range $key, $value := .Data.Terms.Alphabetical }}
+            <a class="block my-2 text-xl leading-loose" href="{{ $value.Name | urlize }}">{{ $value.Name }} ({{ $value.Count }})</a>
+    {{ end }}
+    </div>
+    </main>
+{{end}}

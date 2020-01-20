@@ -1,0 +1,42 @@
+{
+  "hosting": {
+    "public": "build/dist",
+
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+
+    "headers" : [
+        {
+            "source" : "**/*.@(jpg|jpeg|gif|png)",
+            "headers" : [
+                {
+                    "key" : "Cache-Control",
+                    "value" : "public, max-age=604800"
+                }
+            ]
+        }
+    ]
+
+  },
+
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "pubsub": {
+      "port": 8085
+    }
+  }
+}

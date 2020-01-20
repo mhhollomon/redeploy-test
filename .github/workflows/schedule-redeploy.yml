@@ -1,0 +1,46 @@
+name: schedule redeploy
+
+on:
+    repository_dispatch :
+        branches: 
+            - master
+
+    push:
+        branches: 
+            - master
+
+env :
+    BUCKET_URI: "gs://undefined"
+    DS_FILE_NAME: "undefined"
+jobs:
+  schedule-redeploy:
+    name: Schedule Redeploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: setup hugo
+        uses: peaceiris/actions-hugo@v2.4.1
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name : generate_file
+        run  : |
+          hugo list future head -1 > $DS_FILE_NAME
+          echo "schedule file contains:"
+          cat $DS_FILE_NAME
+          echo "END"
+
+      - name : setup-gcloud
+        uses : GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with :
+          version : '276.0.0'
+          service_account_email: ${{secrets.GCP_GITHUB_FID}}
+          service_account_key: ${{secrets.GCP_GITHUB_KEY}}
+
+      - name : upload_file
+        run  : |
+          gsutil cp $DS_FILE_NAME $BUCKET_URI

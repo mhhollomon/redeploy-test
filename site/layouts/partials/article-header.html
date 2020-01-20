@@ -1,0 +1,31 @@
+{{ $type := "article" }}
+{{ $resource := .Resources.GetMatch "xsdf123" }}
+{{ with .Params.cvtype }}
+    {{ $type = . }}
+{{ end }}
+{{ if eq $type "article" }}
+    {{ $resource = .Resources.GetMatch "hero" }}
+{{ else if eq $type "blog" }}
+    {{ $headless := $.Site.GetPage "/blog-headless" }}
+    {{ $resource = $headless.Resources.GetMatch "hero" }}
+{{ end }}
+<h1 class="main-content__title">{{ .Title }}</h1>
+<div class="post-info">
+    <time datetime="{{ dateFormat "2006-01-02" .Params.publishDate }}">{{  dateFormat "2006.01.02" .Params.publishDate }}</time>
+{{ if isset .Params "tags" }}
+    {{ if gt (len .Params.tags) 0 }}&middot; 
+        {{ range $i, $v := .Params.tags }}
+        <a class="tag-link" href="{{ $.Site.BaseURL }}tags/{{ $v | urlize }}">{{ $v | lower }}</a>{{ if ne (len $.Params.tags) (add $i 1) }}, {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ with $resource }}
+    {{ $image := .Fill "800x300" }}
+    <figure class="page-banner">
+    <img src="{{$image.RelPermalink}}" title="{{$image.Title}}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+    {{ with .Params.credits }}
+        <figcaption>{{ . | markdownify }}</figcaption>
+    {{end}}
+    </figure>
+{{ end }}
+</div>

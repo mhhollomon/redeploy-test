@@ -1,0 +1,38 @@
+{
+  "name": "codevamping",
+  "version": "1.0.0",
+  "description": "files for codevamping blog",
+  "main": "index.js",
+  "watch": {
+    "build-and-serve": {
+      "patterns": [
+        "site"
+      ],
+      "extensions": "html,css,md"
+    }
+  },
+  "scripts": {
+    "test": "echo 'Error: no test specified' && exit 1",
+    "hugo:dev": "hugo --environment=development --source=site --destination=../build/dev --buildFuture --buildDrafts --baseUrl=http://0.0.0.0:1313",
+    "hugo:dist": "hugo --source=site --destination=../build/dist --minify",
+    "static:dev": "live-server --host=0.0.0.0 --no-browser --port=1313 ./build/dev",
+    "build:dev": "npm run hugo:dev && npm run static:dev",
+    "build:dist": "npm run hugo:dist",
+    "build-and-serve": "npm run build:dev && npm run static:dev",
+    "edit": "npm-watch build-and-serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhhollomon/codevamping-blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhhollomon/codevamping-blog/issues"
+  },
+  "homepage": "https://github.com/mhhollomon/codevamping-blog#readme",
+  "devDependencies": {
+    "live-server": "^1.2.1",
+    "npm-watch": "^0.6.0"
+  }
+}

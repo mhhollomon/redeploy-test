@@ -1,0 +1,16 @@
+{{define "main" }}
+    <main class="main-content">
+        <article class="post">
+            {{ partial "article-header" . }}
+            {{ .Content}}
+            {{ partial "article-share" . }}
+        </article>
+        {{ with .Site.Params.commentbox_project }}
+            <div class="commentbox"></div>
+            <script>
+                commentBox('{{.}}');
+            </script>
+        {{end}}
+
+    </main>
+{{end}}

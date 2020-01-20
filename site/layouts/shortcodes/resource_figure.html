@@ -1,0 +1,6 @@
+{{ with .Page.Resources.GetMatch (.Get 0) }}
+<figure>
+    <img src="{{.RelPermalink}}" title={{.Title}}>
+    <figcaption>{{.Params.caption}}</figcaption>
+</figure>
+{{end}}

@@ -1,0 +1,14 @@
+{{define "main"}}
+    <main class= "main-content">
+        {{ $paginator := .Paginate (sort (where .Site.RegularPages "Type" "in" site.Params.mainSections) "PublishDate" "desc") }}
+        {{ range $paginator.Pages }}
+        <article class="post-summary post">
+            {{ partial "summary-article-header" . }}
+            {{- partial "summary-text" . -}}
+            <p><a href="{{ .RelPermalink }}" title="{{ .Title }}">Read more &raquo;</a></p>
+        </article>
+        {{ end }}
+        {{ partial "pagination" . }}
+    </main>
+
+{{end}}

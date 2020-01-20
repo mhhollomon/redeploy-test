@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+
+'use strict;'
+
+const Purgecss = require("purgecss");
+const fs = require("fs");
+const path = require("path");
+
+const config_filename = "./purgecss.config.js";
+
+let filename = '-';
+
+if (process.argv.length >= 3) {
+    filename = process.argv[2];
+}
+
+let config;
+
+if (fs.existsSync(config_filename)) {
+    const t = path.join(process.cwd(), config_filename)
+    config = require(t);
+}
+
+let stdin_string = fs.readFileSync(0).toString();
+
+if (config == null) {
+    config = { 
+        css: [{ raw : stdin_string }],
+        content : [ 'site/**/*.html' ] 
+    };
+} else {
+    config.css = [{ raw : stdin_string }];
+}
+
+const purger = new Purgecss(config);
+
+let result = purger.purge();
+
+if (filename == '-') {
+    console.log(result[0].css);
+} else {
+    fs.writeFile(filename, result[0].css, function(err) {
+                    if (err) console.error(err.message)
+                })
+}

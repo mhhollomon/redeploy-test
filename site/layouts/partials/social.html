@@ -1,0 +1,11 @@
+{{ range $serv, $userid := .Site.Social }}
+    {{ $icon_font := index $.Site.Data.socialIcon $serv }}
+    {{ $serv_url := index $.Site.Data.socialURL $serv }}
+    <li>
+        <a href="{{$serv_url}}{{$userid}}" class="mysocial" title="{{$serv}}">
+            <i class="{{$icon_font}} fa-1x"></i>
+        </a>
+    </li>
+{{ end }}
+
+<li><a href="{{ .Site.BaseURL }}/index.xml" class="fas fa-rss" target="_blank" title="RSS"></a></li>

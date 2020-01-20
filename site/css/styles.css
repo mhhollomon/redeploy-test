@@ -1,0 +1,449 @@
+/*************************************************************
+ * Tailwind
+ *************************************************************/
+
+@tailwind base;
+
+@tailwind components;
+
+
+/************************************************************
+ *
+ * Highlight in code fences
+ *
+ ************************************************************/
+
+.highlight {
+    @apply border-t border-b border-l-4 border-gray-400 leading-snug p-4 overflow-x-auto;
+}
+
+/* -----------------------------------------------------------------------------
+   -----------------------------------------------------------------------------
+
+   Theme: Minimalist Theme
+   Version: 1.0
+   Author: Raphael Riegger (http://rriegger.com)
+   License: Apache License Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+
+
+   Additional Changes:
+   Mark Hollomon (https://www.codevamping.com/)
+   License: Apache License Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+
+   -----------------------------------------------------------------------------
+   -----------------------------------------------------------------------------*/
+
+/**** Variable *************************************/
+
+:root {
+  --header-text-indent: -2rem;
+  --site-banner-height: 120px;
+}
+/*
+ * Most of the website is built in Markdown via hugo. So selectors will be
+ * elements rather than classes.
+ */
+
+
+/**********anchor tags ********/
+
+/* light gray with darker gray hover */
+a {
+  text-decoration: none;
+  color: #a2a2a2;
+  transition: all 0.3s ease; 
+}
+a:hover {
+    color: #222222; 
+}
+
+/* reverse the color scheme if the anchor is a heading */
+.post h1 a, 
+.post h2 a, 
+.post h3 a, 
+.post h4 a, 
+.post h5 a, 
+.post h6 a {
+  color: #222222; 
+}
+
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover {
+    color: #a2a2a2; 
+}
+
+
+.side-bar {
+  text-align: center;
+  width: 15%;
+  margin: 20px 2% 0px 5%; 
+}
+
+/* padding is to make room for the
+ * -2rem text-indent used by the subheadings.
+ */
+.main-content {
+  padding-left: calc( var(--header-text-indent) * -1 );
+  @apply w-70pct m-4;
+}
+
+@screen md {
+.main-content {
+  padding-left: calc( var(--header-text-indent) * -1 );
+  @apply w-70pct m-0 mr-5pct;
+}
+
+}
+
+.main-content__title {
+  text-indent: var(--header-text-indent);
+}
+
+.main-content__column {
+  margin: 0 4em 0 calc( var(--header-text-indent) * -1 );
+}
+
+
+
+
+
+/***************** Post **************************
+ *
+ * Main class for articles et al.
+ *
+ * A post will mostly be tags generated from Markdown.
+ * So, this will have to be our handle in most cases,
+ * to apply styles to the generic tags inside.
+ * 
+ *************************************************/
+.post {
+  @apply mb-20 pb-20 border-b border-solid border-cgray;
+}
+
+/*****
+ * anchors that are h2
+ */
+.post h2 a {
+  font-size: 44px;
+  margin-bottom: 10px; 
+}
+
+.post h2 a.footnote-ref {
+    font-size: 75%;
+}
+
+/* don't let images overflow and let the browser keep
+ * the aspect-ratio constant
+ */
+.post img {
+  max-width: 100%;
+  height: auto; 
+}
+
+
+.post p {
+  @apply leading-relaxed my-4;
+}
+
+.post ul {
+    @apply leading-relaxed list-disc;
+}
+
+.post ol {
+    @apply leading-relaxed list-decimal;
+}
+
+.post h1, 
+.post h2, 
+.post h3, 
+.post h4, 
+.post h5, 
+.post h6 {
+  @apply font-sans my-3;
+}
+
+/* Hanging indent on our section headers */
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
+  text-indent: var(--header-text-indent);
+}
+
+.post h1 {
+    @apply text-3xl;
+}
+
+.post h2 {
+    @apply text-2xl;
+}
+
+.post h3 {
+    @apply text-lg;
+}
+
+/************ horizontal rule ***********/
+.post hr {
+  @apply border-gray-400 border-t border-solid my-10;
+}
+
+/**
+ * Remove most spacing between table cells.
+ */
+.post table {
+  border-collapse: collapse;
+  border-spacing: 0; 
+}
+
+
+/************* Post-summary ****************
+ *
+ * Make sure this is after post so we can use both,
+ * but this overrides
+ *******************************************/
+
+.post-summary {
+  padding-bottom: 15px;
+}
+
+/********** Post-info *************/
+/*
+ * The information block at the start of a post
+ * contains the featured image, date, tags
+ */
+.post-info {
+  color: #a2a2a2;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  margin-bottom: 40px;
+  line-height: 30px; 
+}
+
+/************************************************************
+ *
+ * Tag-link
+ *
+ * Mix-in block for anchors to tags or other taxonomy terms
+ *
+ ************************************************************/
+.tag-link {
+  text-decoration: none;
+  color: #3333aa;
+  transition: all 0.3s ease; 
+}
+
+.tag-link:hover {
+    color: #222222; 
+}
+
+.share-buttons {
+  list-style: none;
+  padding: 0; }
+
+.share-buttons li {
+  display: inline;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 13px;
+  color: #979797;
+  margin-right: 4px; }
+
+.share-buttons li a {
+  font-size: 1rem; }
+
+.comments {
+  margin-bottom: 60px; }
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block; }
+
+.tag-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  border-bottom: 1px solid #ececec;
+  margin-bottom: 40px; }
+
+.tag-title h1 {
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 40px; }
+
+.tag-title p {
+  color: #979797;
+  font-size: 14px;
+  margin-bottom: 0; }
+
+
+/*******Button *****************************
+ * Currently only used in pagination
+ *******************************************/
+.btn {
+  @apply block w-24 h-10 bg-white text-black font-sans text-center text-base
+    border-cgray border rounded-sm;
+}
+
+.side-bar {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300; 
+}
+
+.side-bar p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px; }
+
+.side-bar p.name {
+  font-size: 14px;
+  margin: 10px 0; }
+
+.side-bar p.address {
+  color: #979797; }
+
+.side-bar p.link {
+  margin-bottom: 10px; }
+
+.side-bar ul.social {
+  list-style: none;
+  display: inline;
+  padding: 0; }
+
+.side-bar ul.social li {
+  display: inline;
+  margin-right: 0.4em;
+ }
+
+.side-bar ul.social li a {
+  padding: 5px;
+  font-size: 20px; }
+
+.main-footer {
+  background-color: #958078;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  color: #c0c0c0; }
+
+.main-footer .container {
+  padding: 30px 0; }
+
+.main-footer a {
+  color: #a2a2a2; }
+  .main-footer a:hover {
+    color: #222222; }
+
+.main-footer p {
+  font-size: 11px;
+}
+
+
+/************************************************************
+ *
+ * Blockquotes for Markdown
+ *
+ ************************************************************/
+.post blockquote {
+    background-color: #dddddd; 
+    border-left: 2px solid #888888;
+    padding-left: 6px;
+    padding-top: 0.2em;
+    position: relative;
+}
+
+.post blockquote::before {
+    content: "QUOTE";
+    font-style: italic;
+    font-size: 0.7em;
+    top: -0.7em;
+    position: absolute;
+}
+
+
+/************************************************************
+ *
+ * sidebar "brand" menu
+ *
+ ************************************************************/
+.navbar-brand {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+}
+
+.navbar-item {
+    padding: 6px;
+}
+
+/************************************************************
+ *
+ * Archive Widget
+ *
+ ************************************************************/
+/* Styling for the archive links on the left */
+.archive {
+    text-align: left;
+}
+
+.archive__title {
+    text-align: center;
+}
+
+.archive a {
+    line-height: 2em;
+}
+
+/*************************************************************
+**************************************************************/
+
+/* links in the main article should be a blue color */
+article a {
+    color: #3333aa;
+}
+
+/* figures for the page tops */
+/*.page-banner figcaption { */
+figcaption {
+    @apply text-sm italic leading-tight;
+}
+
+.page-banner {
+    @apply mx-8 my-4;
+}
+
+/********************************************
+ *
+ * Side-note shortcode styling
+ *
+ * If the shortcode moves to the theme, so should
+ * the styling.
+ *
+ ********************************************/
+.side-note {
+    background-color: beige;
+    margin-left: 1.5em;
+    border-left: 3px solid #606020;
+    padding-top: 0.2em;
+    padding-left: 6px;
+    position: relative;
+}
+
+.side-note::before {
+    content: "Note";
+    font-style: italic;
+    font-size: 0.7em;
+    top: -0.7em;
+    position: absolute;
+}
+
+.side-note p {
+    margin-left: 10px;
+    line-height: 20pt;
+    font-size: 14px;
+}
+
+@tailwind utilities;

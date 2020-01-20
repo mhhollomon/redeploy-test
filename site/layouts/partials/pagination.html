@@ -1,0 +1,14 @@
+<nav class="w-full flex flex-row h-10 mb-16">
+{{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+    {{ if .Paginator.HasPrev }}
+	<a class="btn" href="{{.Paginator.Prev.URL}}" title="Newer">&laquo; Newer</a>
+	{{ end }}
+{{ end }}
+	<p class="font-sans text-9gray mx-auto"> Page {{ .Paginator.PageNumber}} of {{.Paginator.TotalPages}}</p>
+
+{{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+	{{ if .Paginator.HasNext }}
+	<a class="btn" href="{{.Paginator.Next.URL}}" title="Older">Older &raquo;</a>
+	{{ end }}
+{{ end }}
+</nav>
